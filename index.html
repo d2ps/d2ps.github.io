@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dota 2 Player Simulator</title>
+		<style type="text/css">
+			html, body {
+				padding: 0;
+				margin: 0 auto;
+			}
+			body {
+				background-color: #1C242D;
+				font-family: "Lucida Grande", "Tahoma", "Verdana", "Arial", sans-serif;
+			}
+			#header {
+				background-color: #242F39;
+				padding: 15px;
+				margin: 0 auto;
+				min-width: 500px;
+				text-align: center;
+				color: white;
+				height: 28px;
+				font-family: "Arial", sans-serif;
+				font-size: 24px;
+			}
+			#content {
+				
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				padding: 15px;
+			}
+		
+			#head {
+				font-size: 36px;
+			}
+
+			button {
+				text-align: center;
+				outline: none;
+				border: 1px solid #92bb35;
+				color: #92bb35;
+				background-color: inherit;
+				font-family: inherit;
+
+				font-size: 18px;
+				padding: 15px;
+				margin: 0 auto;
+				display: block;
+			}
+
+			button:hover {
+				cursor: pointer;
+			}
+
+			#popup {
+				position: absolute;
+				z-index: 1;
+				border: 3px solid #654e8c;
+				background-color: #37495e;
+				width: 50%;
+				min-width: 400px;
+				height: 50%;
+				min-height: 400px;
+				margin-top: 100px;
+				margin-left: auto;
+				margin-right: auto;
+				left: 0;
+				right: 0;
+				display: block;
+				text-align: center;
+				color: white;
+				
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="popup">
+			<p style="font-size: 24px;">Stats</p>
+		</div>
+		<div id="header">
+			 <span style="background-color: #ED3B1C; padding: 16px; margin: 0 auto;">DOTA 2 PLAYER SIMULATOR</span>
+		</div>
+
+	
+		<div id="content">
+			<p id="head">DSfjdsifasd;fkasdlf</p>
+			<div id="btns">
+				<button id="b1">asdf</button>
+				<br />
+				<button id="b2">asdf</button>
+				<br />
+				<button id="b3">asdf</button>
+				<br />
+				<button id="b4">asdf</button>
+			</div>
+		</div>
+		<audio id="click">
+			<source src="click.wav" type="audio/wav">
+		</audio>
+		<script type="text/javascript">
+
+			var main = document.getElementById("head");
+			
+			var btnDiv = document.getElementById("btns");
+
+			var btnArr = [document.getElementById("b1"), document.getElementById("b2"), document.getElementById("b3"), document.getElementById("b4")];
+
+			var state = "0";
+
+			var effect = document.getElementById("click");
+
+			function story(sp) {
+				main.innerHTML = sp.head;
+				var choices = sp.choices;
+				var choicesL = choices.length;
+				removeButtons(4 - choicesL);
+				for (i = 0; i < choicesL; i++) {
+					btnArr[i].innerHTML = choices[i][0];
+					btnArr[i].id = choices[i][1];
+					btnArr[i].onclick = function() {
+						effect.play();
+						setState(this.id);
+					}
+				}
+			}
+
+			function StoryPiece(head, choices) {
+				this.head = head;
+				this.choices = choices;
+			}
+
+		
+			story(new StoryPiece("blurb 1", [
+				["choice 1", "1a"], ["choice 2", "1b"], ["choice 3", "1c"]
+			]));
+			
+			
+			function setState(id) {
+				story(storyStates.get(id));				
+			}
+
+			var storyStates = new Map();
+			storyStates.set("1a", new StoryPiece("blurb 2", [["choice 2a", "2a"]]));
+
+			function removeButtons(n) {
+				for (i = (4 - n); i < 4; i++) {
+					btnArr[i].style.display = "none";
+				}
+			}
+
+
+
+		</script>
+	</body>
+</html>
